@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday, Love!</title>
+    <link href="https://fonts.googleapis.com/css2?family=Arvo:ital,wght@0,400;0,700;1,400;1,700&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Arvo', serif;
+            background-color: #ffffff;
+            color: #000000;
+            text-align: center;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        h1 {
+            font-size: 2rem;
+            margin: 10px 0;
+        }
+
+        h2 {
+            font-size: 1rem;
+            margin: 10px 0;
+        }
+
+        .message {
+            font-size: 0.9rem;
+            margin: 15px;
+        }
+
+        .btn {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 8px 16px;
+            background-color: #ff6f61;
+            color: #fff;
+            border: none;
+            border-radius: 25px;
+            text-decoration: none;
+            font-size: 0.8rem;
+            transition: background-color 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #e55a4f;
+        }
+
+        .heart {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: red;
+            transform: rotate(45deg);
+            animation: float 10s infinite;
+        }
+
+        .heart:before,
+        .heart:after {
+            content: "";
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: red;
+            border-radius: 50%;
+        }
+
+        .heart:before {
+            top: -5px;
+            left: 0;
+        }
+
+        .heart:after {
+            left: -5px;
+            top: 0;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) rotate(45deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-1000px) rotate(45deg);
+                opacity: 0;
+            }
+        }
+
+        .page {
+            display: none;
+        }
+
+        .active {
+            display: block;
+        }
+
+        .banner {
+            position: fixed;
+            top: -100px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            animation: slideDown 3s forwards;
+            text-align: center;
+        }
+
+        .banner .row {
+            display: flex;
+            justify-content: center;
+            gap: 5px;
+        }
+
+        .banner .letter {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 5px;
+            font-size: 20px;
+            font-weight: bold;
+            color: white;
+            animation: colorChange 2s infinite;
+        }
+
+        @keyframes slideDown {
+            0% {
+                top: -100px;
+            }
+            100% {
+                top: 20px;
+            }
+        }
+
+        @keyframes colorChange {
+            0% {
+                background-color: #f44336;
+            }
+            25% {
+                background-color: #ff9800;
+            }
+            50% {
+                background-color: #4caf50;
+            }
+            75% {
+                background-color: #2196f3;
+            }
+            100% {
+                background-color: #9c27b0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="hearts-container"></div>
+
+    <div id="page1" class="page active">
+        <h1>As You Wished, Madam!</h1>
+        <p class="message">It’s your special day, yeaay! 🎉</p>
+        <button class="btn" onclick="goToPage(2);">Next</button>
+    </div>
+
+    <div id="page2" class="page">
+        <h1>Wanna See What I Made for You? 💌</h1>
+        <button class="btn" onclick="goToPage(3);">Yes</button>
+        <button class="btn no-btn" onclick="moveNoButton(this);">No</button>
+    </div>
+
+    <div id="page3" class="page">
+        <h1>Play Special Birthday Music 🎵</h1>
+        <p class="message">Press the button below to play a special song just for you! 🎶</p>
+        <button class="btn" onclick="goToPage(4); playMusic();">Play Music</button>
+    </div>
+
+    <div id="page4" class="page">
+        <h1>Let’s Decorate! 🎀</h1>
+        <p class="message">Click below to decorate your special day with a festive vibe! 🎊</p>
+        <button class="btn" onclick="startDecorations(); goToPage(5);">Start Decoration</button>
+        <div id="decorations" class="decorations"></div>
+    </div>
+
+    <div id="page5" class="page">
+        <h1>Now for Some Balloons 🎈</h1>
+        <p class="message">Watch the balloons float just for you! 🎈</p>
+        <button class="btn" onclick="goToPage(6); addBalloons();">Release Balloons</button>
+    </div>
+
+    <div id="page6" class="page">
+        <h1>Let’s Cut the Cake 🎂</h1>
+        <p class="message">Click below to cut the cake! 🍰</p>
+        <button class="btn" onclick="goToPage(7);">Cut the Cake</button>
+    </div>
+
+    <div id="page7" class="page">
+        <h1>A Letter for You ❤️</h1>
+        <p class="message">Dear Love,<br><br>
+        Happy Birthday to the most wonderful person in my life. You make every day magical, and I am so grateful for you. Here’s to celebrating you today and always. 🥳🎂<br><br>
+        Love you forever,<br>
+        Jubair Prince (JP)
+        </p>
+    </div>
+
+    <script>
+        let currentPage = 1;
+
+        function goToPage(pageNumber) {
+            document.querySelector(`#page${currentPage}`).classList.remove('active');
+            document.querySelector(`#page${pageNumber}`).classList.add('active');
+            currentPage = pageNumber;
+
+            if (pageNumber === 5) {
+                showBanner();
+            }
+        }
+
+        function playMusic() {
+            const audio = new Audio('https://www.bensound.com/bensound-music/bensound-happy.mp3');
+            audio.play();
+        }
+
+        function addBalloons() {
+            for (let i = 0; i < 20; i++) {
+                const balloon = document.createElement('div');
+                balloon.classList.add('balloon');
+                balloon.style.left = Math.random() * 100 + 'vw';
+                balloon.style.animationDuration = Math.random() * 2 + 4 + 's';
+                document.body.appendChild(balloon);
+                setTimeout(() => balloon.remove(), 6000);
+            }
+        }
+
+        function startDecorations() {
+            for (let i = 0; i < 50; i++) {
+                const heart = document.createElement('div');
+                heart.classList.add('heart');
+                heart.style.left = Math.random() * 100 + 'vw';
+                heart.style.animationDuration = Math.random() * 2 + 3 + 's';
+                document.body.appendChild(heart);
+                setTimeout(() => heart.remove(), 6000);
+            }
+        }
+
+        function moveNoButton(button) {
+            button.style.top = Math.random() * 80 + 'vh';
+            button.style.left = Math.random() * 80 + 'vw';
+        }
+
+        function showBanner() {
+            const banner = document.createElement('div');
+            banner.className = 'banner';
+
+            const happyRow = document.createElement('div');
+            happyRow.className = 'row';
+            const birthdayRow = document.createElement('div');
+            birthdayRow.className = 'row';
+
+            // Create "Happy"
+            'HAPPY'.split('').forEach((char) => {
+                const letter = document.createElement('div');
+                letter.className = 'letter';
+                letter.textContent = char;
+                happyRow.appendChild(letter);
+            });
+
+            // Create "Birthday"
+            'BIRTHDAY'.split('').forEach((char) => {
+                const letter = document.createElement('div');
+                letter.className = 'letter';
+                letter.textContent = char;
+                birthdayRow.appendChild(letter);
+            });
+
+            banner.appendChild(happyRow);
+            banner.appendChild(birthdayRow);
+            document.body.appendChild(banner);
+        }
+
+        function createFloatingHearts() {
+            setInterval(() => {
+                const heart = document.createElement('div');
+                heart.classList.add('heart');
+                heart.style.left = Math.random() * 100 + 'vw';
+                heart.style.animationDuration = Math.random() * 10 + 5 + 's';
+                document.body.appendChild(heart);
+
+                // Remove heart after its animation ends
+                setTimeout(() => heart.remove(), 10000);
+            }, 500);
+        }
+
+        createFloatingHearts();
+    </script>
+</body>
+</html>
