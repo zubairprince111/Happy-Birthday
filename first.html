@@ -4,11 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Happy Birthday, Love!</title>
-    <link href="https://fonts.googleapis.com/css2?family=Arvo:ital,wght@0,400;0,700;1,400;1,700&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Itim&display=swap" rel="stylesheet">
     <style>
         body {
             margin: 0;
-            font-family: 'Arvo', serif;
+            font-family: "Itim", serif;
             background-color: #ffffff;
             color: #000000;
             text-align: center;
@@ -157,6 +157,36 @@
                 background-color: #9c27b0;
             }
         }
+
+        #gift-video-popup {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.8);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        #gift-video {
+            width: 80%;
+            border-radius: 10px;
+            background: #000;
+        }
+
+        #gift-video-popup button {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            background: #ff6f61;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            padding: 5px 10px;
+        }
     </style>
 </head>
 <body>
@@ -176,7 +206,7 @@
 
     <div id="page3" class="page">
         <h1>Play Special Birthday Music 🎵</h1>
-        <p class="message">Press the button below to play a special song just for you! 🎶</p>
+        <p class="message">bhaaai trust me 2din dhore just audiotai inpute deyar try kortesi hocchei na, sorryyyy. if you want the audio let me know i specially made it for you</p>
         <button class="btn" onclick="goToPage(4); playMusic();">Play Music</button>
     </div>
 
@@ -200,12 +230,37 @@
     </div>
 
     <div id="page7" class="page">
-        <h1>A Letter for You ❤️</h1>
+        <h1>Ekta Chirkut </h1>
         <p class="message">Dear Love,<br><br>
-        Happy Birthday to the most wonderful person in my life. You make every day magical, and I am so grateful for you. Here’s to celebrating you today and always. 🥳🎂<br><br>
+            Happy Birthday, Othoi! 🎉❤️<br>
+
+            It’s your special day and I can’t help but think about how far we’ve come together. We’ve shared so much—memories, emotions and moments that have shaped us. Yet, we’ve never had the chance to celebrate these special days side by side.
+            
+            But you know what? That’s okay. We still have time, don’t we? Time to create new memories, to celebrate not just birthdays but all the little joys of life together. I truly believe that the best is yet to come for us.
+            
+            You mean the world to me and I hope this day brings you all the happiness you deserve. No matter where we are or what the circumstances may be, you’ll always have a special place in my heart.
+            
+            Here’s to you, Othoi—to your happiness, your dreams and the bright future ahead of us. Let’s make it unforgettable, one step at a time. <br><br>
         Love you forever,<br>
-        Jubair Prince (JP)
+        ALU aka JP
         </p>
+        <button class="btn" onclick="goToPage(8);">See Your Gift</button>
+    </div>
+
+    <!-- Page 8 with Gift Button -->
+    <div id="page8" class="page">
+        <h1>Your Special Gift 🎁</h1>
+        <p class="message">Click below to open your special gift! 🎁</p>
+        <button class="btn" onclick="openGift();">Open Gift</button>
+    </div>
+
+    <!-- Popup for the Gift Video -->
+    <div id="gift-video-popup">
+        <video id="gift-video" controls>
+            <source src="0118.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <button onclick="closeGift();">Close</button>
     </div>
 
     <script>
@@ -281,6 +336,14 @@
             banner.appendChild(happyRow);
             banner.appendChild(birthdayRow);
             document.body.appendChild(banner);
+        }
+
+        function openGift() {
+            document.getElementById('gift-video-popup').style.display = 'flex';
+        }
+
+        function closeGift() {
+            document.getElementById('gift-video-popup').style.display = 'none';
         }
 
         function createFloatingHearts() {
