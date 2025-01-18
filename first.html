@@ -205,27 +205,29 @@
     </div>
 
     <div id="page3" class="page">
-        <h1>Play Special Birthday Music 🎵</h1>
-        <p class="message">bhaaai trust me 2din dhore just audiotai inpute deyar try kortesi hocchei na, sorryyyy. if you want the audio let me know i specially made it for you</p>
-        <button class="btn" onclick="goToPage(4); playMusic();">Play Music</button>
+        <h1>By the way, How is Life?</h1>
+        <p class="message">(ik, it's tough to express. So what? say GU and move on)</p>
+        <button class="btn" onclick="goToPage(4);">GU</button>
     </div>
 
     <div id="page4" class="page">
         <h1>Let’s Decorate! 🎀</h1>
-        <p class="message">Click below to decorate your special day with a festive vibe! 🎊</p>
+        <p class="message">short a shairafeli, ki kow! 🎊</p>
         <button class="btn" onclick="startDecorations(); goToPage(5);">Start Decoration</button>
         <div id="decorations" class="decorations"></div>
     </div>
 
     <div id="page5" class="page">
-        <h1>Now for Some Balloons 🎈</h1>
-        <p class="message">Watch the balloons float just for you! 🎈</p>
-        <button class="btn" onclick="goToPage(6); addBalloons();">Release Balloons</button>
+        <h1>Now for Some Butterflies</h1>
+        <p class="message">ektu katukutu deeei?</p>
+        <audio id="preloaded-audio" src="audio.mp3" controls></audio>
+        <br>
+        <button class="btn" onclick="goToPage(6); addBalloons();">Keep The Butterflies</button>
     </div>
 
     <div id="page6" class="page">
         <h1>Let’s Cut the Cake 🎂</h1>
-        <p class="message">Click below to cut the cake! 🍰</p>
+        <p class="message">apatoto button chaipai cake katar shad naw</p>
         <button class="btn" onclick="goToPage(7);">Cut the Cake</button>
     </div>
 
@@ -276,8 +278,8 @@
             }
         }
 
-        function playMusic() {
-            const audio = new Audio('https://www.bensound.com/bensound-music/bensound-happy.mp3');
+        function gu() {
+            const audio = new Audio(audio.mp3);
             audio.play();
         }
 
